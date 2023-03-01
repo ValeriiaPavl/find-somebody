@@ -1,0 +1,10 @@
+{% extends 'DatingSite/base.html' %}
+{% block content %}
+<menu>
+    <a href="/accounts/login">Login Page</a>
+    <a href="/logout">Logout</a>
+    <a href="/signup">Signup</a>
+    <a href="/accounts/people">Watch people</a>
+    <a href="{% url 'user_profile:view_profile' login_id=request.user.pk %}">Your profile</a>
+</menu>
+{% endblock %}

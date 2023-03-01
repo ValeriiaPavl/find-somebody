@@ -1,0 +1,17 @@
+{% extends 'DatingSite/base.html' %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>profile</title>
+</head>
+<body>
+<p>You haven't told anything about yourself yet.</p>
+<p>Please fill the form</p>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Send to FSB</button>
+</form>
+{% endblock %}

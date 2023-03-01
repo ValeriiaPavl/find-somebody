@@ -1,0 +1,26 @@
+{% extends 'DatingSite/base.html' %}
+ {% load static %}
+
+{% block content %}
+
+        {% if profiles_list %}
+            {% for profile in profiles_list %}
+                <div class="user_card">
+                    <img class='small_avatar' src="{% static profile.user_avatar %}" width="60px" height="auto">
+                    <div class="choto_tam">
+                        <span>
+                            {{ profile.name }} {{ profile.surname }}
+                        </span><br>
+                        <span>
+                            {{ profile.gender }} - Lives in {{ profile.country_of_residence }}
+                        </span><br>
+                        <span>
+                               <a href="{% url 'user_profile:view_profile' login_id=profile.login.pk %}">Watch profile</a>
+                        </span>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %} <p>There is no people yet</p>
+        {% endif %}
+<div><a href="{% url 'menu' %}">Return to menu</a></div>
+{% endblock %}
