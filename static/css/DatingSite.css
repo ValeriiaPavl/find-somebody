@@ -34,4 +34,7 @@ align-items: center;
 margin: 5px;
 }
 
-
+.like-button {
+border: none;
+background-color: transparent;
+}

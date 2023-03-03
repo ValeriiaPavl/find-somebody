@@ -18,9 +18,19 @@
                                <a href="{% url 'user_profile:view_profile' login_id=profile.login.pk %}">Watch profile</a>
                         </span>
                     </div>
+                    <button type="submit" class="like-button" id="{{ profile.login }}-like" onclick="changeColor(id)"><img src="{% static 'icons/heart.svg' %}"></button>
                 </div>
             {% endfor %}
         {% else %} <p>There is no people yet</p>
         {% endif %}
 <div><a href="{% url 'menu' %}">Return to menu</a></div>
+
+<script>
+function changeColor(id) {
+    new_image = '<img src="{% static 'icons/heart-fill.svg' %}">';
+    document.getElementById(id).innerHTML = new_image;
+}
+</script>
+
 {% endblock %}
+
