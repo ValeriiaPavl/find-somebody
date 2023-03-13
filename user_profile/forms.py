@@ -7,4 +7,4 @@ class UserDescription(forms.ModelForm):
 
     class Meta:
         model = UserInfo
-        exclude = ['user_avatar', 'login']
+        exclude = ['user_avatar', 'login', 'liked_users']
