@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from user_profile.models import UserInfo
 
@@ -8,5 +8,17 @@ class ListPeopleView(LoginRequiredMixin, View):
     template_name = 'find_people/list_profiles.html'
 
     def get(self, request):
-        return render(request, self.template_name, context={'profiles_list': UserInfo.objects.all()})
+        profiles_for_watching = UserInfo.objects.all()
+        annotated_users = UserInfo.user_liked(request.user.pk, profiles_for_watching)
+        print(annotated_users.filter(liked=True))
+        return render(request, self.template_name, context={'profiles_list': annotated_users})
+
+    def post(self, request):
+        liked_user = UserInfo.objects.get(login=int(request.POST['liked_user']))
+        current_user = UserInfo.objects.get(login=request.user.pk)
+        current_user.liked_users.add(liked_user)
+        current_user.save()
+        print((current_user.name, current_user.liked_users.all()))
+        return redirect('/accounts/people')
+
 
