@@ -6,4 +6,6 @@
         {% load static %}
         <div><img src="{% static user_info.user_avatar %}" width="240px" height="auto"></div>
         <div> <a href="{% url 'user_profile:edit_profile' login_id=user_info.login.pk %}">Edit profile</a></div>
+
+        <div> <p>User liked other users: {{ user_likes }}</p></div>
 {% endblock %}
