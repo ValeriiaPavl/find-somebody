@@ -63,7 +63,8 @@ class ViewProfileView(LoginRequiredMixin, View):
             user_info = UserInfo.objects.get(login=login_id)
         except Http404:
             return redirect('user_profile:create_profile')
-        context = {'user_info': user_info}
+        user_likes = user_info.liked_users.all()
+        context = {'user_info': user_info, 'user_likes': user_likes}
         return render(request, self.template_name, context)
 
 
