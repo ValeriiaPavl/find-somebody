@@ -55,13 +55,12 @@ class EditProfileView(LoginRequiredMixin, View):
 class ViewProfileView(LoginRequiredMixin, View):
     template_name = 'user_profile/view_profile.html'
 
-
     def get(self, request, login_id=None):
         if login_id is None:
             login_id = request.user.pk
         try:
             user_info = UserInfo.objects.get(login=login_id)
-        except Http404:
+        except UserInfo.DoesNotExist:
             return redirect('user_profile:create_profile')
         user_likes = user_info.liked_users.all()
         context = {'user_info': user_info, 'user_likes': user_likes}
