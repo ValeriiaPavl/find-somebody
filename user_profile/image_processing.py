@@ -4,7 +4,8 @@ from pathlib import Path
 def save_avatar(username, file):
     base_dir = Path(__file__).resolve().parent.parent
     new_directory = base_dir / 'static' / 'users' / 'avatars' / username
-    new_directory.mkdir()
+    if not(new_directory.exists()):
+        new_directory.mkdir()
     image = new_directory / file.name
     with open(image, 'wb') as destination:
         for chunk in file.chunks():
