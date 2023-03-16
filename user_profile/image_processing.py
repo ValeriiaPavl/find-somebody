@@ -1,7 +1,8 @@
 from pathlib import Path
+from django.core.files.uploadedfile import UploadedFile
 
 
-def save_avatar(username, file):
+def save_avatar(username: str, file: dict[str, UploadedFile]) -> Path:
     base_dir = Path(__file__).resolve().parent.parent
     new_directory = base_dir / 'static' / 'users' / 'avatars' / username
     if not(new_directory.exists()):
