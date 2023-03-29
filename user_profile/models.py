@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from django.db import models
 from django.conf import settings
 from django.db.models import QuerySet
@@ -16,7 +18,7 @@ class UserInfo(models.Model):
     gender = models.CharField(max_length=20, choices=Sex.choices, default=Sex.not_specified)
     email = models.EmailField()
     country_of_residence = models.CharField(max_length=100, default="not specified")
-    user_avatar = models.URLField()
+    user_avatar = models.URLField(default=Path(f'without_avatar.webp'))
     user_description = models.TextField()
     liked_users = models.ManyToManyField("self", symmetrical=False)
 
