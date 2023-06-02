@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'authentication',
     'user_profile',
     'DatingSite',
-    'find_people'
+    'find_people',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
