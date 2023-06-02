@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
 from user_profile.models import UserInfo
+from .filters import UserFilter
 
 
 class ListPeopleView(LoginRequiredMixin, View):
@@ -21,4 +22,10 @@ class ListPeopleView(LoginRequiredMixin, View):
         print((current_user.name, current_user.liked_users.all()))
         return redirect('/accounts/people')
 
+
+class SearchView(View):
+    def get(self, request):
+        user_list = UserInfo.objects.all()
+        user_filter = UserFilter(request.GET, queryset=user_list)
+        return render(request, 'find_people/search_users.html', {'filter': user_filter})
 
